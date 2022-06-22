@@ -10,6 +10,23 @@ app.use(cors());
 // parse application/json
 app.use(bodyParser.json());
 
+//  mongodb Connection Code
+
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri =
+  "mongodb+srv://monogodbuserDipok:<password>@cluster0.isfsk8s.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
+client.connect((err) => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  console.log("mongoDb Connected");
+  client.close();
+});
+
 // server
 
 app.get("/", (req, res) => {
